@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5005/api',
+    baseURL: 'https://resboard.onrender.com/api',
 });
 
 api.interceptors.request.use(
