@@ -14,7 +14,12 @@ export const AuthProvider = ({ children }) => {
             const username = localStorage.getItem('username');
 
             if (token && username) {
-                setUser({ token, role, username });
+                try {
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    setUser({ token, role, username, userId: payload.userId });
+                } catch (e) {
+                    setUser({ token, role, username });
+                }
             }
             setLoading(false);
         };
@@ -28,7 +33,14 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
         localStorage.setItem('username', username);
-        setUser({ token, role, username });
+
+        let userId = null;
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            userId = payload.userId;
+        } catch (e) { }
+
+        setUser({ token, role, username, userId });
         return response.data;
     };
 

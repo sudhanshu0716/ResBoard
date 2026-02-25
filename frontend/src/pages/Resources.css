@@ -146,7 +146,9 @@
     text-overflow: ellipsis;
 }
 
-.td-actions {
+.td-actions {}
+
+.actions-wrapper {
     display: flex;
     align-items: center;
     gap: 0.5rem;

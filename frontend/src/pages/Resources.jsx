@@ -232,43 +232,45 @@ const Resources = ({ type }) => {
                                                 ) : '-'}
                                             </td>
                                             <td className="td-actions">
-                                                {res.state === 'FREE' && (
-                                                    <button className="btn-action take" onClick={() => handleOpenModal('Take', res)} title="Reserve Resource">
-                                                        <Lock size={16} /> Reserve
-                                                    </button>
-                                                )}
-                                                {res.state === 'IN-USE' && (isAdmin || (res.usedBy && (res.usedBy._id === user.userId || res.usedBy === user.userId))) && (
-                                                    <button className="btn-action release" onClick={() => handleRelease(res._id)} title="Release Resource">
-                                                        <Unlock size={16} /> Release
-                                                    </button>
-                                                )}
-
-                                                {res.state === 'IN-USE' && res.usedBy && res.usedBy._id !== user.userId && (
-                                                    <button className="btn-action warn" onClick={() => handleUrgentRequest(res._id)} title="Send Urgent Request">
-                                                        <AlertTriangle size={16} /> Urgent
-                                                    </button>
-                                                )}
-
-                                                {(isAdmin || (res.state === 'FREE') || (res.state === 'IN-USE' && res.usedBy && res.usedBy._id === user.userId)) && res.state !== 'MAINTENANCE' && (
-                                                    <button className="btn-icon edit" onClick={() => handleOpenModal('Edit', res)} title="Edit">
-                                                        <Edit2 size={16} />
-                                                    </button>
-                                                )}
-
-                                                {isAdmin && (
-                                                    <>
-                                                        <button
-                                                            className={`btn-icon ${res.state === 'MAINTENANCE' ? 'warn-active' : 'warn'}`}
-                                                            onClick={() => setMaintenance(res._id, res.state)}
-                                                            title="Toggle Maintenance"
-                                                        >
-                                                            <AlertTriangle size={16} />
+                                                <div className="actions-wrapper">
+                                                    {res.state === 'FREE' && (
+                                                        <button className="btn-action take" onClick={() => handleOpenModal('Take', res)} title="Reserve Resource">
+                                                            <Lock size={16} /> Reserve
                                                         </button>
-                                                        <button className="btn-icon danger" onClick={() => handleDelete(res._id)} title="Delete">
-                                                            <Trash2 size={16} />
+                                                    )}
+                                                    {res.state === 'IN-USE' && (isAdmin || (res.usedBy && (res.usedBy._id === user.userId || res.usedBy === user.userId))) && (
+                                                        <button className="btn-action release" onClick={() => handleRelease(res._id)} title="Release Resource">
+                                                            <Unlock size={16} /> Release
                                                         </button>
-                                                    </>
-                                                )}
+                                                    )}
+
+                                                    {res.state === 'IN-USE' && res.usedBy && res.usedBy._id !== user.userId && (
+                                                        <button className="btn-action warn" onClick={() => handleUrgentRequest(res._id)} title="Send Urgent Request">
+                                                            <AlertTriangle size={16} /> Urgent
+                                                        </button>
+                                                    )}
+
+                                                    {(isAdmin || (res.state === 'FREE') || (res.state === 'IN-USE' && res.usedBy && res.usedBy._id === user.userId)) && res.state !== 'MAINTENANCE' && (
+                                                        <button className="btn-icon edit" onClick={() => handleOpenModal('Edit', res)} title="Edit">
+                                                            <Edit2 size={16} />
+                                                        </button>
+                                                    )}
+
+                                                    {isAdmin && (
+                                                        <>
+                                                            <button
+                                                                className={`btn-icon ${res.state === 'MAINTENANCE' ? 'warn-active' : 'warn'}`}
+                                                                onClick={() => setMaintenance(res._id, res.state)}
+                                                                title="Toggle Maintenance"
+                                                            >
+                                                                <AlertTriangle size={16} />
+                                                            </button>
+                                                            <button className="btn-icon danger" onClick={() => handleDelete(res._id)} title="Delete">
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                </div>
                                             </td>
                                         </motion.tr>
                                     ))
