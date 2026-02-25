@@ -58,7 +58,7 @@ const AdminLogs = () => {
 
     const formatAction = (action) => {
         switch (action) {
-            case 'TAKE': return <span className="action-badge take">TAKE</span>;
+            case 'TAKE': return <span className="action-badge take">RESERVE</span>;
             case 'RELEASE': return <span className="action-badge release">RELEASE</span>;
             case 'MAINTENANCE_START': return <span className="action-badge maint">MAINTENANCE START</span>;
             case 'MAINTENANCE_END': return <span className="action-badge maint-end">MAINTENANCE END</span>;
@@ -102,7 +102,7 @@ const AdminLogs = () => {
                                     insights.activeUsers.map((u, i) => (
                                         <li key={i}>
                                             <span className="name">{u.username}</span>
-                                            <span className="count">{u.takes} requests</span>
+                                            <span className="count">{u.takes} reservations</span>
                                         </li>
                                     ))
                                 }

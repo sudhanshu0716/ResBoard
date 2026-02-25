@@ -8,7 +8,6 @@ router.get('/', verifyToken, async (req, res) => {
     try {
         const notifications = await Notification.find({ recipient: req.user.userId })
             .populate('sender', 'username')
-            .populate('resource', 'name')
             .sort({ createdAt: -1 });
         res.json(notifications);
     } catch (error) {

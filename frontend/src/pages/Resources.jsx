@@ -233,11 +233,11 @@ const Resources = ({ type }) => {
                                             </td>
                                             <td className="td-actions">
                                                 {res.state === 'FREE' && (
-                                                    <button className="btn-action take" onClick={() => handleOpenModal('Take', res)} title="Take Resource">
-                                                        <Lock size={16} /> Take
+                                                    <button className="btn-action take" onClick={() => handleOpenModal('Take', res)} title="Reserve Resource">
+                                                        <Lock size={16} /> Reserve
                                                     </button>
                                                 )}
-                                                {res.state === 'IN-USE' && (
+                                                {res.state === 'IN-USE' && (isAdmin || (res.usedBy && res.usedBy._id === user.userId)) && (
                                                     <button className="btn-action release" onClick={() => handleRelease(res._id)} title="Release Resource">
                                                         <Unlock size={16} /> Release
                                                     </button>
@@ -282,7 +282,7 @@ const Resources = ({ type }) => {
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                title={`${modalMode} ${type}`}
+                title={`${modalMode === 'Take' ? 'Reserve' : modalMode} ${type}`}
             >
                 <form onSubmit={submitForm} className="modal-form">
                     {modalMode === 'Take' ? (
@@ -399,7 +399,7 @@ const Resources = ({ type }) => {
                     <div className="modal-actions">
                         <button type="button" className="btn-secondary" onClick={() => setIsModalOpen(false)}>Cancel</button>
                         <button type="submit" className="btn-primary">
-                            {modalMode === 'Take' ? 'Confirm Take' : 'Save Changes'}
+                            {modalMode === 'Take' ? 'Confirm Reserve' : 'Save Changes'}
                         </button>
                     </div>
                 </form>
