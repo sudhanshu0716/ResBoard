@@ -237,7 +237,7 @@ const Resources = ({ type }) => {
                                                         <Lock size={16} /> Reserve
                                                     </button>
                                                 )}
-                                                {res.state === 'IN-USE' && (isAdmin || (res.usedBy && res.usedBy._id === user.userId)) && (
+                                                {res.state === 'IN-USE' && (isAdmin || (res.usedBy && (res.usedBy._id === user.userId || res.usedBy === user.userId))) && (
                                                     <button className="btn-action release" onClick={() => handleRelease(res._id)} title="Release Resource">
                                                         <Unlock size={16} /> Release
                                                     </button>
